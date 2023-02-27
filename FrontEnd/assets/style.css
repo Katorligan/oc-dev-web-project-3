@@ -222,6 +222,31 @@ li:hover {
 	margin-bottom: 1em;
 }
 
+.filters {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-bottom: 2em;
+}
+
+.filters button {
+	height: 40px;
+	font-size: 1.2em;
+	font-weight: 700;
+	font-family: "Syne";
+	color: #1d6154;
+	background-color: #fffef8;
+	border: 1px solid #1d6154;
+	border-radius: 60px;
+	padding: 0 30px;
+	cursor: pointer;
+}
+
+.filters button.active {
+	color: #fffef8;
+	background-color: #1d6154;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
