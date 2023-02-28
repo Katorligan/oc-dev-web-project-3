@@ -1,12 +1,10 @@
 // Fetching all works from API
-const answerWorks = await fetch("http://localhost:5678/api/works");
-const works = await answerWorks.json();
-console.log(works);
+const responseWorks = await fetch("http://localhost:5678/api/works");
+const works = await responseWorks.json();
 
 // Fetching all categories from API
-const answerCategories = await fetch("http://localhost:5678/api/categories");
-const categories = new Set(await answerCategories.json());
-console.log(categories);
+const responseCategories = await fetch("http://localhost:5678/api/categories");
+const categories = new Set(await responseCategories.json());
 
 // Function that creates gallery using an array of works
 function createGallery(works) {
