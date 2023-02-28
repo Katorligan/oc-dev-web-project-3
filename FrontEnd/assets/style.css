@@ -140,20 +140,26 @@ html {
 }
 
 body {
-	max-width: 1140px;
 	min-height: 100vh;
 	position: relative;
-	margin: auto;
 	font-family: "Work Sans";
 	font-size: 14px;
 	background-color: #fffef8;
 }
 
 header {
+	max-width: 1140px;
 	display: flex;
 	justify-content: space-between;
+	margin: auto;
 	margin-bottom: 50px;
-	padding-top: 50px;
+	padding: 50px 50px 0 50px;
+}
+
+main {
+	max-width: 950px;
+	margin: auto;
+	padding: 0 100px;
 }
 
 section {
@@ -214,6 +220,8 @@ nav img {
 #introduction {
 	display: flex;
 	align-items: center;
+	gap: 70px;
+	margin: 130px 0;
 }
 
 #introduction figure {
@@ -222,8 +230,7 @@ nav img {
 
 #introduction img {
 	display: block;
-	margin: auto;
-	width: 80%;
+	width: 100%;
 }
 
 #introduction article {
@@ -240,14 +247,14 @@ nav img {
 
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	margin-bottom: 50px;
 }
 
 .filters {
 	display: flex;
 	justify-content: center;
 	gap: 10px;
-	margin-bottom: 2em;
+	margin: 50px 0;
 }
 
 .filters button {
@@ -314,6 +321,7 @@ nav img {
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	resize: none;
 }
 
 input[type="submit"] {
@@ -388,4 +396,33 @@ body::after {
 	content: "";
 	display: block;
 	height: 70px;
+}
+
+/* Elements showing when user is logged in */
+
+#edit-mode {
+	width: 100%;
+	height: 60px;
+	color: white;
+	background-color: black;
+	display: none;
+	justify-content: center;
+	align-items: center;
+}
+
+#edit-mode p {
+	margin-left: 5px;
+	margin-right: 20px;
+}
+
+#edit-mode button {
+	height: 40px;
+	font-size: 1.2em;
+	font-weight: 500;
+	font-family: "Work Sans";
+	color: black;
+	background-color: white;
+	border-radius: 60px;
+	padding: 0 25px;
+	cursor: pointer;
 }
