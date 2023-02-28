@@ -37,14 +37,12 @@ function createFilters(categories) {
 		button.innerText = category.name;
 
 		// Add click event listener
-		button.addEventListener("click", function () {
+		button.addEventListener("click", () => {
 			document.querySelector(".active").className = "";
 			button.className = "active";
 
 			// Filter works using category id
-			const worksFiltered = works.filter(function (work) {
-				return work.category.id == category.id;
-			});
+			const worksFiltered = works.filter((work) => work.category.id == category.id);
 
 			// Clear gallery then recreate it using filtered works
 			document.querySelector(".gallery").innerHTML = "";
@@ -56,7 +54,7 @@ function createFilters(categories) {
 
 	// Add click event listener for the no-filter button
 	const buttonNoFilter = document.querySelector("#no-filter");
-	buttonNoFilter.addEventListener("click", function () {
+	buttonNoFilter.addEventListener("click", () => {
 		document.querySelector(".active").className = "";
 		buttonNoFilter.className = "active";
 
