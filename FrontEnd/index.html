@@ -17,11 +17,12 @@
 </head>
 
 <body>
-	<div id="edit-mode">
+	<div id="edit-banner" aria-hidden="true">
 		<i class="fa-regular fa-pen-to-square"></i>
 		<p>Mode édition</p>
 		<button>publier les changements</button>
 	</div>
+
 	<header>
 		<a href="index.html">
 			<h1>Sophie Bluel <span>ARCHITECTE D'INTÉRIEUR</span></h1>
@@ -43,6 +44,7 @@
 			</ul>
 		</nav>
 	</header>
+
 	<main>
 		<section id="introduction">
 			<figure>
@@ -59,13 +61,24 @@
 					décorateur(trice)</p>
 			</article>
 		</section>
+
+		<button class="edit" id="edit-profile" aria-hidden="true">
+			<i class="fa-regular fa-pen-to-square"></i>
+			<p>modifier</p>
+		</button>
+
 		<section id="portfolio">
 			<h2>Mes projets</h2>
+			<button class="edit" id="edit-works" aria-hidden="true">
+				<i class="fa-regular fa-pen-to-square"></i>
+				<p>modifier</p>
+			</button>
 			<div class="filters">
 				<button class="active" id="no-filter">Tous</button>
 			</div>
 			<div class="gallery"></div>
 		</section>
+
 		<section id="contact">
 			<h2>Contact</h2>
 			<p>Vous avez un projet ? Discutons-en !</p>

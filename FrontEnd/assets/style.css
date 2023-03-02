@@ -372,7 +372,7 @@ input[type="submit"] {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-#new-password {
+#forgotten-password {
 	margin: auto;
 	text-decoration: underline;
 }
@@ -400,7 +400,7 @@ body::after {
 
 /* Elements showing when user is logged in */
 
-#edit-mode {
+#edit-banner {
 	width: 100%;
 	height: 60px;
 	color: white;
@@ -408,14 +408,17 @@ body::after {
 	display: none;
 	justify-content: center;
 	align-items: center;
+	position: sticky;
+	top: 0;
+	z-index: 1;
 }
 
-#edit-mode p {
+#edit-banner p {
 	margin-left: 5px;
 	margin-right: 20px;
 }
 
-#edit-mode button {
+#edit-banner button {
 	height: 40px;
 	font-size: 1.2em;
 	font-weight: 500;
@@ -425,4 +428,27 @@ body::after {
 	border-radius: 60px;
 	padding: 0 25px;
 	cursor: pointer;
+}
+
+.edit {
+	display: flex;
+	gap: 5px;
+	position: relative;
+	background-color: #fffef8;
+	border: 0;
+	cursor: pointer;
+	padding: 0;
+}
+
+.edit i {
+	font-size: 1.1em;
+}
+
+#edit-profile {
+	top: -120px;
+}
+
+#edit-works {
+	top: -70px;
+	left: 64%;
 }

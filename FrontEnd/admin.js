@@ -1,4 +1,4 @@
-const editBanner = document.querySelector("#edit-mode");
+const editBanner = document.querySelector("#edit-banner");
 const loginLink = document.querySelector("#login-link");
 const filters = document.querySelector(".filters");
 
