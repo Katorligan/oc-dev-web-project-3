@@ -431,7 +431,7 @@ body::after {
 }
 
 .edit {
-	display: flex;
+	display: none;
 	gap: 5px;
 	position: relative;
 	background-color: #fffef8;
