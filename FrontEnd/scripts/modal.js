@@ -1,3 +1,5 @@
+import { createGallery } from "./gallery.js";
+
 const focusElementSelector = "button, input, a, textarea";
 let focusElements = [];
 let modalFocusElements = [];
@@ -27,7 +29,7 @@ function openModal(event) {
 	}
 
 	// Add gallery
-	createGallery(works);
+	createEditGallery(works);
 }
 
 function closeModal(event) {
@@ -71,11 +73,15 @@ window.addEventListener("keydown", (event) => {
 });
 
 // Fetching all works from API
-const responseWorks = await fetch("http://localhost:5678/api/works");
-const works = await responseWorks.json();
+let works;
+fetchWorks();
+async function fetchWorks() {
+	const responseWorks = await fetch("http://localhost:5678/api/works");
+	works = await responseWorks.json();
+}
 
 // Function that creates gallery using an array of works
-function createGallery(works) {
+function createEditGallery(works) {
 	const gallery = document.querySelector(".edit-gallery");
 
 	for (let work of works) {
@@ -83,6 +89,9 @@ function createGallery(works) {
 		gallery.appendChild(figure);
 
 		const deleteButton = document.createElement("button");
+		deleteButton.addEventListener("click", () => {
+			deleteWork(work.id);
+		});
 
 		const trashIcon = document.createElement("i");
 		trashIcon.className = "fa-solid fa-trash-can";
@@ -99,4 +108,21 @@ function createGallery(works) {
 		figure.appendChild(img);
 		figure.appendChild(figcaption);
 	}
+}
+
+// Function to delete a project
+async function deleteWork(id) {
+	const token = localStorage.getItem("token");
+
+	const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+		method: "DELETE",
+		headers: { Authorization: `Bearer ${token}` },
+	});
+
+	document.querySelector(".edit-gallery").innerHTML = "";
+	document.querySelector(".gallery").innerHTML = "";
+	fetchWorks().then(() => {
+		createEditGallery(works);
+		createGallery(works);
+	});
 }

@@ -7,7 +7,7 @@ const responseCategories = await fetch("http://localhost:5678/api/categories");
 const categories = new Set(await responseCategories.json());
 
 // Function that creates gallery using an array of works
-function createGallery(works) {
+export function createGallery(works) {
 	const gallery = document.querySelector(".gallery");
 
 	for (let work of works) {
