@@ -474,6 +474,7 @@ body::after {
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.3);
+	animation: fadeIn 0.3s both;
 }
 
 .modal-wrapper {
@@ -487,6 +488,53 @@ body::after {
 	box-sizing: border-box;
 	text-align: center;
 	position: absolute;
+	animation: zoomIn 0.3s both;
+}
+
+.modal[aria-hidden="true"] {
+	animation-name: fadeOut;
+}
+
+.modal[aria-hidden="true"] .modal-wrapper {
+	animation-name: zoomOut;
+}
+
+/* Modal open and close animations */
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes zoomIn {
+	from {
+		scale: 0.5;
+	}
+	to {
+		scale: 1;
+	}
+}
+
+@keyframes zoomOut {
+	from {
+		scale: 1;
+	}
+	to {
+		scale: 0.5;
+	}
 }
 
 .close-modal {

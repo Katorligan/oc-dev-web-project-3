@@ -30,9 +30,9 @@ function openModal(event) {
 function closeModal(event) {
 	event.preventDefault();
 
-	// Hide modal and change attributes for accessibility
+	// Hide modal (with delay for animation) and change attributes for accessibility
 	const editModal = document.querySelector("#edit-modal");
-	editModal.style.display = null;
+	window.setTimeout(() => (editModal.style.display = null), 300);
 	editModal.setAttribute("aria-hidden", true);
 	editModal.removeAttribute("aria-modal");
 
