@@ -25,6 +25,9 @@ function openModal(event) {
 	for (let element of focusElements) {
 		element.setAttribute("tabindex", -1);
 	}
+
+	// Add gallery
+	createGallery(works);
 }
 
 function closeModal(event) {
@@ -45,6 +48,10 @@ function closeModal(event) {
 	for (let element of focusElements) {
 		element.removeAttribute("tabindex");
 	}
+
+	// Remove gallery
+	const gallery = editModal.querySelector(".edit-gallery");
+	gallery.innerHTML = "";
 }
 
 // Function used to make sure click on modal wrapper wont close modal
@@ -62,3 +69,34 @@ window.addEventListener("keydown", (event) => {
 		closeModal(event);
 	}
 });
+
+// Fetching all works from API
+const responseWorks = await fetch("http://localhost:5678/api/works");
+const works = await responseWorks.json();
+
+// Function that creates gallery using an array of works
+function createGallery(works) {
+	const gallery = document.querySelector(".edit-gallery");
+
+	for (let work of works) {
+		const figure = document.createElement("figure");
+		gallery.appendChild(figure);
+
+		const deleteButton = document.createElement("button");
+
+		const trashIcon = document.createElement("i");
+		trashIcon.className = "fa-solid fa-trash-can";
+		deleteButton.appendChild(trashIcon);
+
+		const img = document.createElement("img");
+		img.src = work.imageUrl;
+		img.alt = work.title;
+
+		const figcaption = document.createElement("figcaption");
+		figcaption.innerText = "éditer";
+
+		figure.appendChild(deleteButton);
+		figure.appendChild(img);
+		figure.appendChild(figcaption);
+	}
+}
