@@ -192,6 +192,7 @@ function createUploadCategories(categories) {
 	}
 }
 
+// Adding preview for file upload
 function updatePicturePreview(event) {
 	event.preventDefault();
 
@@ -202,11 +203,13 @@ function updatePicturePreview(event) {
 	picturePreview.style.opacity = 0;
 
 	if (pictureInput.files.length > 0) {
+		// Alert if file is not valid
 		if (!isValidFileType(pictureInput.files[0]) || pictureInput.files[0].size > 4194304) {
 			window.alert("Fichier non conforme");
 			pictureInput.value = null;
 			return;
 		}
+
 		const preview = document.createElement("img");
 		preview.src = window.URL.createObjectURL(pictureInput.files[0]);
 		preview.alt = "Picture preview";
@@ -216,6 +219,7 @@ function updatePicturePreview(event) {
 	}
 }
 
+// Checking size and type of file
 function isValidFileType(file) {
 	const validFileTypes = ["image/jpeg", "image/png"];
 
