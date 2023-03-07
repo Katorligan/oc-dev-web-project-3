@@ -87,9 +87,12 @@
 					<form action="#" method="post">
 						<div id="add-picture-container">
 							<i class="fa-regular fa-image"></i>
-							<label for="picture" class="file-upload">+ Ajouter photo</label>
-							<input type="file" name="picture" id="picture" required>
+							<label for="picture" class="file-upload">
+								+ Ajouter photo
+							</label>
+							<input type="file" name="picture" id="picture" accept=".jpeg, .jpg, .png" required>
 							jpg, png : 4mo max
+							<div id="picture-preview"></div>
 						</div>
 						<label for="title">Titre</label>
 						<input type="text" name="title" id="title" required>

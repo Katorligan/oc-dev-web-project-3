@@ -27,6 +27,9 @@ function openModal(event) {
 	editModal.querySelector("#add-picture").addEventListener("click", openUploadModalPage);
 	editModal.querySelector(".previous-modal").addEventListener("click", closeUploadModalPage);
 
+	// Add event for picture preview
+	editModal.querySelector("#picture").addEventListener("change", updatePicturePreview);
+
 	// Disabling focusability on elements outside modal
 	for (let element of focusElements) {
 		element.setAttribute("tabindex", -1);
@@ -57,6 +60,9 @@ function closeModal(event) {
 	editModal.querySelector("#add-picture").removeEventListener("click", openUploadModalPage);
 	editModal.querySelector(".previous-modal").removeEventListener("click", closeUploadModalPage);
 
+	// Remove event for picture preview
+	editModal.querySelector("#picture").removeEventListener("change", updatePicturePreview);
+
 	// Enabling focusability on elements outside modal
 	for (let element of focusElements) {
 		element.removeAttribute("tabindex");
@@ -69,9 +75,6 @@ function closeModal(event) {
 	// Remove categories from form
 	const selectCategory = editModal.querySelector("#category");
 	selectCategory.innerHTML = "";
-
-	// Close upload page after animation
-	window.setTimeout(() => closeUploadModalPage(), 300);
 }
 
 // Function used to make sure click on modal wrapper wont close modal
@@ -187,4 +190,40 @@ function createUploadCategories(categories) {
 
 		selectCategory.appendChild(option);
 	}
+}
+
+function updatePicturePreview(event) {
+	event.preventDefault();
+
+	const pictureInput = document.querySelector("#picture");
+	const picturePreview = document.querySelector("#picture-preview");
+
+	picturePreview.innerHTML = "";
+	picturePreview.style.opacity = 0;
+
+	if (pictureInput.files.length > 0) {
+		if (!isValidFileType(pictureInput.files[0]) || pictureInput.files[0].size > 4194304) {
+			window.alert("Fichier non conforme");
+			pictureInput.value = null;
+			return;
+		}
+		const preview = document.createElement("img");
+		preview.src = window.URL.createObjectURL(pictureInput.files[0]);
+		preview.alt = "Picture preview";
+
+		picturePreview.appendChild(preview);
+		picturePreview.style.opacity = 1;
+	}
+}
+
+function isValidFileType(file) {
+	const validFileTypes = ["image/jpeg", "image/png"];
+
+	for (let type of validFileTypes) {
+		if (file.type === type) {
+			return true;
+		}
+	}
+
+	return false;
 }
