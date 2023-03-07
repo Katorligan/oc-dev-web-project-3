@@ -20,8 +20,12 @@ function openModal(event) {
 
 	// Add events to close modal on button and outside modal wrapper
 	editModal.addEventListener("click", closeModal);
-	editModal.querySelector(".close-modal").addEventListener("click", closeModal);
+	editModal.querySelectorAll(".close-modal").forEach((button) => button.addEventListener("click", closeModal));
 	editModal.querySelector(".modal-wrapper").addEventListener("click", stopPropagation);
+
+	// Add events to change page
+	editModal.querySelector("#add-picture").addEventListener("click", openUploadModalPage);
+	editModal.querySelector(".previous-modal").addEventListener("click", closeUploadModalPage);
 
 	// Disabling focusability on elements outside modal
 	for (let element of focusElements) {
@@ -30,6 +34,9 @@ function openModal(event) {
 
 	// Add gallery
 	createEditGallery(works);
+
+	// Add categories to form
+	createUploadCategories(categories);
 }
 
 function closeModal(event) {
@@ -43,8 +50,12 @@ function closeModal(event) {
 
 	// Remove events to close modal
 	editModal.removeEventListener("click", closeModal);
-	editModal.querySelector(".close-modal").removeEventListener("click", closeModal);
+	editModal.querySelectorAll(".close-modal").forEach((button) => button.removeEventListener("click", closeModal));
 	editModal.querySelector(".modal-wrapper").removeEventListener("click", stopPropagation);
+
+	// Remove events to change page
+	editModal.querySelector("#add-picture").removeEventListener("click", openUploadModalPage);
+	editModal.querySelector(".previous-modal").removeEventListener("click", closeUploadModalPage);
 
 	// Enabling focusability on elements outside modal
 	for (let element of focusElements) {
@@ -54,11 +65,42 @@ function closeModal(event) {
 	// Remove gallery
 	const gallery = editModal.querySelector(".edit-gallery");
 	gallery.innerHTML = "";
+
+	// Remove categories from form
+	const selectCategory = editModal.querySelector("#category");
+	selectCategory.innerHTML = "";
+
+	// Close upload page after animation
+	window.setTimeout(() => closeUploadModalPage(), 300);
 }
 
 // Function used to make sure click on modal wrapper wont close modal
 function stopPropagation(event) {
 	event.stopPropagation();
+}
+
+// Opening page for upload
+function openUploadModalPage() {
+	const galleryPage = document.querySelector("#gallery-modal-container");
+	const uploadPage = document.querySelector("#add-picture-modal-container");
+
+	galleryPage.style.display = "none";
+	galleryPage.setAttribute("aria-hidden", true);
+
+	uploadPage.style.display = "block";
+	uploadPage.removeAttribute("aria-hidden");
+}
+
+// Closing page for upload
+function closeUploadModalPage() {
+	const galleryPage = document.querySelector("#gallery-modal-container");
+	const uploadPage = document.querySelector("#add-picture-modal-container");
+
+	galleryPage.style.display = null;
+	galleryPage.removeAttribute("aria-hidden");
+
+	uploadPage.style.display = null;
+	uploadPage.setAttribute("aria-hidden", true);
 }
 
 // Add event to edit button for openning modal
@@ -125,4 +167,24 @@ async function deleteWork(id) {
 		createEditGallery(works);
 		createGallery(works);
 	});
+}
+
+// Fetching all categories from API
+const responseCategories = await fetch("http://localhost:5678/api/categories");
+const categories = await responseCategories.json();
+
+// Adding categories options to upload form
+function createUploadCategories(categories) {
+	const selectCategory = document.querySelector("#category");
+
+	const emptyOption = document.createElement("option");
+	selectCategory.appendChild(emptyOption);
+
+	for (let category of categories) {
+		const option = document.createElement("option");
+		option.value = category.id;
+		option.innerText = category.name;
+
+		selectCategory.appendChild(option);
+	}
 }
