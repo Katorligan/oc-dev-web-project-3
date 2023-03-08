@@ -9,9 +9,7 @@ focusElements = Array.from(document.querySelectorAll(focusElementSelector));
 modalFocusElements = Array.from(document.querySelector("#edit-modal").querySelectorAll(focusElementSelector));
 focusElements = focusElements.filter((element) => !modalFocusElements.includes(element));
 
-function openModal(event) {
-	event.preventDefault();
-
+function openModal() {
 	// Show modal and change attributes for accessibility
 	const editModal = document.querySelector("#edit-modal");
 	editModal.style.display = "flex";
@@ -45,9 +43,7 @@ function openModal(event) {
 	createUploadCategories(categories);
 }
 
-function closeModal(event) {
-	event.preventDefault();
-
+function closeModal() {
 	// Hide modal (with delay for animation) and change attributes for accessibility
 	const editModal = document.querySelector("#edit-modal");
 	window.setTimeout(() => (editModal.style.display = null), 300);
@@ -199,9 +195,7 @@ function createUploadCategories(categories) {
 }
 
 // Adding preview for file upload
-function updatePicturePreview(event) {
-	event.preventDefault();
-
+function updatePicturePreview() {
 	const pictureInput = document.querySelector("#image");
 	const picturePreview = document.querySelector("#picture-preview");
 
@@ -251,7 +245,21 @@ async function uploadWork(event) {
 		body: workData,
 	});
 
-	if (responseUpload.status === 200) {
+	if (responseUpload.status === 201) {
+		// Empty form inputs
+		const form = event.target;
+		form.image.value = null;
+		form.title.value = null;
+		form.category.value = null;
+		updatePicturePreview();
+
+		closeModal();
+
+		// Refresh gallery
+		document.querySelector(".gallery").innerHTML = "";
+		fetchWorks().then(() => {
+			createGallery(works);
+		});
 	} else {
 		alert(`Échec de la mise en ligne\n\nErreur ${responseUpload.status} : ${responseUpload.statusText}`);
 	}
