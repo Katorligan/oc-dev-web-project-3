@@ -1,3 +1,5 @@
+import { alertBox } from "./login.js";
+
 // Getting all elements affected by admin view
 const editBanner = document.querySelector("#edit-banner");
 const loginLink = document.querySelector("#login-link");
@@ -15,7 +17,6 @@ if (window.localStorage.getItem("token")) {
 
 	// Logout removes token from local storage
 	loginLink.addEventListener("click", () => {
-		window.localStorage.removeItem("userId");
 		window.localStorage.removeItem("token");
 	});
 
@@ -26,4 +27,11 @@ if (window.localStorage.getItem("token")) {
 	for (let button of editButtons) {
 		button.style.display = "flex";
 	}
+}
+
+// Show alert box after login
+if (window.localStorage.getItem("showAlertBox")) {
+	const alert = alertBox("success", "Connexion réussie");
+	document.querySelector("main").appendChild(alert);
+	window.localStorage.removeItem("showAlertBox");
 }
