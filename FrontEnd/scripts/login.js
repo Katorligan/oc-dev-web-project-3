@@ -1,3 +1,5 @@
+import { displayAlertBox } from "./admin.js";
+
 // Function handling login event
 async function loginSubmit(event) {
 	// Prevent default form event on submit
@@ -26,37 +28,10 @@ async function loginSubmit(event) {
 		window.localStorage.setItem("token", userLogin.token);
 		window.location.href = "index.html";
 	} else {
-		const alert = alertBox("error", "Erreur dans l'identifiant ou le mot de passe");
-		document.querySelector("main").appendChild(alert);
+		displayAlertBox("error", "Erreur dans l'identifiant ou le mot de passe", 3000);
 	}
 }
 
 // Adding login function to the form submit
-const loginForm = document.querySelector("form");
+const loginForm = document.querySelector("#login");
 loginForm.addEventListener("submit", loginSubmit);
-
-// Create an alert box
-export function alertBox(type, message) {
-	const box = document.createElement("div");
-	box.className = "alert-box";
-
-	switch (type) {
-		case "success":
-			box.style.backgroundColor = "#5cb54e";
-			break;
-		case "error":
-			box.style.backgroundColor = "#e84a3f";
-			break;
-	}
-
-	const text = document.createElement("p");
-	text.innerText = message;
-	box.appendChild(text);
-
-	const closeButton = document.createElement("button");
-	closeButton.innerText = "X";
-	closeButton.addEventListener("click", () => box.parentNode.removeChild(box));
-	box.appendChild(closeButton);
-
-	return box;
-}

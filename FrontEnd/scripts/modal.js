@@ -1,4 +1,5 @@
 import { createGallery } from "./gallery.js";
+import { displayAlertBox } from "./admin.js";
 
 const focusElementSelector = "button, input, a, textarea";
 let focusElements = [];
@@ -205,7 +206,7 @@ function updatePicturePreview() {
 	if (pictureInput.files.length > 0) {
 		// Alert if file is not valid
 		if (!isValidFileType(pictureInput.files[0]) || pictureInput.files[0].size > 4194304) {
-			alert("Le fichier sélectionné n'est pas conforme");
+			displayAlertBox("error", "Le fichier sélectionné n'est pas conforme", 3000);
 			pictureInput.value = null;
 			return;
 		}
@@ -261,6 +262,6 @@ async function uploadWork(event) {
 			createGallery(works);
 		});
 	} else {
-		alert(`Échec de la mise en ligne\n\nErreur ${responseUpload.status} : ${responseUpload.statusText}`);
+		displayAlertBox("error", `Échec de la mise en ligne\nErreur ${responseUpload.status} : ${responseUpload.statusText}`, 3000);
 	}
 }
