@@ -19,7 +19,7 @@ async function loginSubmit(event) {
 	const userLogin = await responseLogin.json();
 
 	// If email and password are correct, store user id and token on local storage and go to index. Else, show alert message
-	if (responseLogin.status == 200) {
+	if (responseLogin.status === 200) {
 		window.localStorage.setItem("userId", userLogin.userId);
 		window.localStorage.setItem("token", userLogin.token);
 		window.location.href = "index.html";

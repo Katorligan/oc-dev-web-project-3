@@ -42,7 +42,7 @@ function createFilters(categories) {
 			button.className = "active";
 
 			// Filter works using category id
-			const worksFiltered = works.filter((work) => work.category.id == category.id);
+			const worksFiltered = works.filter((work) => work.category.id === category.id);
 
 			// Clear gallery then recreate it using filtered works
 			document.querySelector(".gallery").innerHTML = "";

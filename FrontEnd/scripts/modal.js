@@ -28,7 +28,10 @@ function openModal(event) {
 	editModal.querySelector(".previous-modal").addEventListener("click", closeUploadModalPage);
 
 	// Add event for picture preview
-	editModal.querySelector("#picture").addEventListener("change", updatePicturePreview);
+	editModal.querySelector("#image").addEventListener("change", updatePicturePreview);
+
+	// Add event for form submit
+	editModal.querySelector("form").addEventListener("submit", uploadWork);
 
 	// Disabling focusability on elements outside modal
 	for (let element of focusElements) {
@@ -61,7 +64,10 @@ function closeModal(event) {
 	editModal.querySelector(".previous-modal").removeEventListener("click", closeUploadModalPage);
 
 	// Remove event for picture preview
-	editModal.querySelector("#picture").removeEventListener("change", updatePicturePreview);
+	editModal.querySelector("#image").removeEventListener("change", updatePicturePreview);
+
+	// Remove event for form submit
+	editModal.querySelector("form").removeEventListener("submit", uploadWork);
 
 	// Enabling focusability on elements outside modal
 	for (let element of focusElements) {
@@ -196,7 +202,7 @@ function createUploadCategories(categories) {
 function updatePicturePreview(event) {
 	event.preventDefault();
 
-	const pictureInput = document.querySelector("#picture");
+	const pictureInput = document.querySelector("#image");
 	const picturePreview = document.querySelector("#picture-preview");
 
 	picturePreview.innerHTML = "";
@@ -205,14 +211,14 @@ function updatePicturePreview(event) {
 	if (pictureInput.files.length > 0) {
 		// Alert if file is not valid
 		if (!isValidFileType(pictureInput.files[0]) || pictureInput.files[0].size > 4194304) {
-			window.alert("Fichier non conforme");
+			alert("Le fichier sélectionné n'est pas conforme");
 			pictureInput.value = null;
 			return;
 		}
 
 		const preview = document.createElement("img");
 		preview.src = window.URL.createObjectURL(pictureInput.files[0]);
-		preview.alt = "Picture preview";
+		preview.alt = "Image preview";
 
 		picturePreview.appendChild(preview);
 		picturePreview.style.opacity = 1;
@@ -230,4 +236,23 @@ function isValidFileType(file) {
 	}
 
 	return false;
+}
+
+// Upload new work
+async function uploadWork(event) {
+	event.preventDefault();
+
+	const token = localStorage.getItem("token");
+	const workData = new FormData(event.target);
+
+	const responseUpload = await fetch("http://localhost:5678/api/works", {
+		method: "POST",
+		headers: { Authorization: `Bearer ${token}` },
+		body: workData,
+	});
+
+	if (responseUpload.status === 200) {
+	} else {
+		alert(`Échec de la mise en ligne\n\nErreur ${responseUpload.status} : ${responseUpload.statusText}`);
+	}
 }
