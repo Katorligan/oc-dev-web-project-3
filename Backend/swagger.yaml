@@ -171,6 +171,68 @@ paths:
          description: Unauthorized
        '500':
          description: Unexpected Behaviour
+  /messages:
+    get:
+      summary: Returns all messages
+      responses:
+        '200':
+          description: Returns an array of all messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 1
+                    name:
+                      type: string
+                      example: "John Doe"
+                    email:
+                      type: string
+                      example: "john.doe@example.com"
+                    content:
+                      type: string
+                      example: "Example content of message"
+        '500':
+          description: Unexpected Error
+    post:
+     summary: Send a new message
+     requestBody:
+       required: true
+       content:
+         application/json:
+           schema:
+             type: object
+             properties:
+               name:
+                 type: string
+               email:
+                 type: string
+               content:
+                 type: string
+     responses:
+       '201':
+         description: Created
+         content:
+           application/json:
+             schema:
+               type: object
+               properties:
+                 id:
+                   type: integer
+                   format: int64
+                 name:
+                   type: string
+                 email:
+                   type: string
+                 content:
+                   type: string
+       '500':
+         description: Unexpected Error
 
 components:
   securitySchemes:
