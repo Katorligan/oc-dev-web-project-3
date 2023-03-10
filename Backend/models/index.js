@@ -12,7 +12,6 @@ db.sequelize = sequelize;
 db.users = require('./users.model.js')(sequelize, Sequelize);
 db.works = require('./works.model.js')(sequelize, Sequelize);
 db.categories = require('./categories.model.js')(sequelize, Sequelize);
-db.messages = require('./messages.model.js')(sequelize, Sequelize);
 
 // Works and Categories Relationships
 db.categories.hasMany(db.works, { as: 'works' });

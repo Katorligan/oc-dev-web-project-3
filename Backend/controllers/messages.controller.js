@@ -1,19 +1,25 @@
-const db = require('./../models');
-const Messages = db.messages;
+const nodemailer = require('nodemailer');
 
-exports.findAll = async (req, res) => {
-	try {
-		const messages = await Messages.findAll();
-		return res.status(200).json(messages);
-	} catch (err) {
-		return res.status(500).json({ error: new Error('Something went wrong') });
-	}
-};
+exports.sendMessage = async (req, res) => {
+	const transporter = nodemailer.createTransport({
+		host: 'smtp.ethereal.email',
+		port: 587,
+		auth: {
+			user: 'imani.corkery99@ethereal.email',
+			pass: 'tWEpYejZPGVEgaZ3Bc',
+		},
+	});
 
-exports.create = async (req, res) => {
+	const message = {
+		from: 'hello@sophiebluel.com',
+		to: 'sophie.bluel@gmail.com',
+		subject: `New message from ${req.message.name}, ${req.message.email}`,
+		text: req.message.content,
+	};
+
 	try {
-		const message = await Messages.create(req.message);
-		return res.status(201).json(message);
+		const info = await transporter.sendMail(message);
+		return res.status(200).json(info);
 	} catch (err) {
 		return res.status(500).json({ error: new Error('Something went wrong') });
 	}

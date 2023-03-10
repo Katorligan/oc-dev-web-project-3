@@ -11,7 +11,7 @@ async function sendMessage(event) {
 		body: messageData,
 	});
 
-	if (responseMessage.status === 201) {
+	if (responseMessage.status === 200) {
 		// Empty form inputs
 		const form = event.target;
 		form.name.value = null;
