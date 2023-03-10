@@ -204,7 +204,7 @@ paths:
      requestBody:
        required: true
        content:
-         application/json:
+         multipart/form-data:
            schema:
              type: object
              properties:
@@ -231,6 +231,8 @@ paths:
                    type: string
                  content:
                    type: string
+       '400':
+         description: Bad Request
        '500':
          description: Unexpected Error
 

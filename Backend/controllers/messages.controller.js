@@ -11,15 +11,8 @@ exports.findAll = async (req, res) => {
 };
 
 exports.create = async (req, res) => {
-	const name = req.body.name;
-	const email = req.body.email;
-	const content = req.body.content;
 	try {
-		const message = await Messages.create({
-			name,
-			email,
-			content,
-		});
+		const message = await Messages.create(req.message);
 		return res.status(201).json(message);
 	} catch (err) {
 		return res.status(500).json({ error: new Error('Something went wrong') });
