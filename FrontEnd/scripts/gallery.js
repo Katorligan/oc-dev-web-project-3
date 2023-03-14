@@ -32,6 +32,21 @@ createGallery(works);
 function createFilters(categories) {
 	const filters = document.querySelector('.filters');
 
+	// Create no-filter button
+	const buttonNoFilter = document.createElement('button');
+	buttonNoFilter.innerText = 'Tous';
+	buttonNoFilter.className = 'active';
+	filters.appendChild(buttonNoFilter);
+	// Add click event listener
+	buttonNoFilter.addEventListener('click', () => {
+		document.querySelector('.active').className = '';
+		buttonNoFilter.className = 'active';
+
+		document.querySelector('.gallery').innerHTML = '';
+		createGallery(works);
+	});
+
+	// Create filter buttons
 	for (let category of categories) {
 		const button = document.createElement('button');
 		button.innerText = category.name;
@@ -51,16 +66,6 @@ function createFilters(categories) {
 
 		filters.appendChild(button);
 	}
-
-	// Add click event listener for the no-filter button
-	const buttonNoFilter = document.querySelector('#no-filter');
-	buttonNoFilter.addEventListener('click', () => {
-		document.querySelector('.active').className = '';
-		buttonNoFilter.className = 'active';
-
-		document.querySelector('.gallery').innerHTML = '';
-		createGallery(works);
-	});
 }
 
 createFilters(categories);
