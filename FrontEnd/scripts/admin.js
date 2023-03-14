@@ -8,6 +8,7 @@ const filters = document.querySelector('.filters');
 if (window.sessionStorage.getItem('token')) {
 	// Display edit banner
 	editBanner.style.display = 'flex';
+	editBanner.removeAttribute('aria-hidden');
 
 	// Change login to logout
 	loginLink.href = 'index.html';
@@ -20,10 +21,12 @@ if (window.sessionStorage.getItem('token')) {
 
 	// Hide filters
 	filters.style.display = 'none';
+	filters.setAttribute('aria-hidden', true);
 
 	// Display edit buttons
 	for (let button of editButtons) {
 		button.style.display = 'flex';
+		button.removeAttribute('aria-hidden');
 	}
 }
 
