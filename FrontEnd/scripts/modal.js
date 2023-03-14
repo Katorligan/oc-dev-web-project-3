@@ -29,6 +29,11 @@ function openModal() {
 	// Add event for picture preview
 	editModal.querySelector('#image').addEventListener('change', updatePicturePreview);
 
+	// Add events for enabling form submit
+	editModal.querySelector('#image').addEventListener('change', enableUpload);
+	editModal.querySelector('#title').addEventListener('input', enableUpload);
+	editModal.querySelector('#category').addEventListener('change', enableUpload);
+
 	// Add event for form submit
 	editModal.querySelector('form').addEventListener('submit', uploadWork);
 
@@ -204,7 +209,7 @@ function updatePicturePreview() {
 	picturePreview.style.opacity = 0;
 
 	if (pictureInput.files.length > 0) {
-		// Alert if file is not valid
+		// Alert if file is not valid type or size
 		if (!isValidFileType(pictureInput.files[0]) || pictureInput.files[0].size > 4194304) {
 			displayAlertBox('error', "Le fichier sélectionné n'est pas conforme", 3000);
 			pictureInput.value = null;
@@ -220,7 +225,7 @@ function updatePicturePreview() {
 	}
 }
 
-// Checking size and type of file
+// Checking type of file
 function isValidFileType(file) {
 	const validFileTypes = ['image/jpeg', 'image/png'];
 
@@ -231,6 +236,20 @@ function isValidFileType(file) {
 	}
 
 	return false;
+}
+
+// Enable upload form if all informations are filled
+function enableUpload() {
+	const form = document.querySelector('#add-picture-modal-container').querySelector('form');
+	const fileInput = form.querySelector('#image');
+	const titleInput = form.querySelector('#title');
+	const categoryInput = form.querySelector('#category');
+
+	if (fileInput.files.length > 0 && titleInput.value.length > 0 && categoryInput.value > 0) {
+		form.querySelector('input[type="submit"]').disabled = false;
+	} else {
+		form.querySelector('input[type="submit"]').disabled = true;
+	}
 }
 
 // Upload new work

@@ -751,6 +751,15 @@ body::after {
 	width: 230px;
 }
 
+#add-picture-modal-container input[type='submit']:disabled {
+	background-color: #a7a7a7;
+	cursor: default;
+}
+
+#add-picture-modal-container input[type='submit']:disabled:hover {
+	opacity: 1;
+}
+
 #picture-preview {
 	position: absolute;
 	width: 100%;
