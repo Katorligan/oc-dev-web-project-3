@@ -150,6 +150,12 @@ function createEditGallery(works) {
 		trashIcon.className = 'fa-solid fa-trash-can';
 		deleteButton.appendChild(trashIcon);
 
+		const moveButton = document.createElement('button');
+		moveButton.className = 'move-button';
+		const moveIcon = document.createElement('i');
+		moveIcon.className = 'fa-solid fa-arrows-up-down-left-right';
+		moveButton.appendChild(moveIcon);
+
 		const img = document.createElement('img');
 		img.src = work.imageUrl;
 		img.alt = work.title;
@@ -158,6 +164,7 @@ function createEditGallery(works) {
 		figcaption.innerText = 'éditer';
 
 		figure.appendChild(deleteButton);
+		figure.appendChild(moveButton);
 		figure.appendChild(img);
 		figure.appendChild(figcaption);
 	}

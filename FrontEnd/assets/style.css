@@ -640,6 +640,15 @@ body::after {
 	right: 5px;
 }
 
+.edit-gallery .move-button {
+	right: 28px;
+	display: none;
+}
+
+.edit-gallery figure:hover .move-button {
+	display: block;
+}
+
 .edit-gallery img {
 	width: 100%;
 }
