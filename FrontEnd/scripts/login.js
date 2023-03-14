@@ -20,12 +20,12 @@ async function loginSubmit(event) {
 	});
 	const userLogin = await responseLogin.json();
 
-	// If email and password are correct, store token on local storage and go to index. Else, show alert message
+	// If email and password are correct, store token on session storage and go to index. Else, show alert message
 	if (responseLogin.status === 200) {
 		// boolean used for alert on index after succesful login
-		window.localStorage.setItem('showAlertBox', true);
+		window.sessionStorage.setItem('showAlertBox', true);
 
-		window.localStorage.setItem('token', userLogin.token);
+		window.sessionStorage.setItem('token', userLogin.token);
 		window.location.href = 'index.html';
 	} else {
 		displayAlertBox('error', "Erreur dans l'identifiant ou le mot de passe", 3000);

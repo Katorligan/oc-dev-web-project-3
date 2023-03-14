@@ -4,8 +4,8 @@ const loginLink = document.querySelector('#login-link');
 const editButtons = document.querySelectorAll('.edit');
 const filters = document.querySelector('.filters');
 
-// Change admin elements if login token is in local storage
-if (window.localStorage.getItem('token')) {
+// Change admin elements if login token is in session storage
+if (window.sessionStorage.getItem('token')) {
 	// Display edit banner
 	editBanner.style.display = 'flex';
 
@@ -13,9 +13,9 @@ if (window.localStorage.getItem('token')) {
 	loginLink.href = 'index.html';
 	loginLink.innerHTML = '<li>logout</li>';
 
-	// Logout removes token from local storage
+	// Logout removes token from session storage
 	loginLink.addEventListener('click', () => {
-		window.localStorage.removeItem('token');
+		window.sessionStorage.removeItem('token');
 	});
 
 	// Hide filters
@@ -28,9 +28,9 @@ if (window.localStorage.getItem('token')) {
 }
 
 // Show alert box after login
-if (window.localStorage.getItem('showAlertBox')) {
+if (window.sessionStorage.getItem('showAlertBox')) {
 	displayAlertBox('success', 'Connexion réussie', 3000);
-	window.localStorage.removeItem('showAlertBox');
+	window.sessionStorage.removeItem('showAlertBox');
 }
 
 // Create an alert box

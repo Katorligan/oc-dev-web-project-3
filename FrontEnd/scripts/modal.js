@@ -160,7 +160,7 @@ function createEditGallery(works) {
 
 // Function to delete a project
 async function deleteWork(id) {
-	const token = localStorage.getItem('token');
+	const token = sessionStorage.getItem('token');
 
 	const response = await fetch(`http://localhost:5678/api/works/${id}`, {
 		method: 'DELETE',
@@ -237,7 +237,7 @@ function isValidFileType(file) {
 async function uploadWork(event) {
 	event.preventDefault();
 
-	const token = localStorage.getItem('token');
+	const token = sessionStorage.getItem('token');
 	const workData = new FormData(event.target);
 
 	const responseUpload = await fetch('http://localhost:5678/api/works', {
