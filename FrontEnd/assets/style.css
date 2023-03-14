@@ -554,19 +554,19 @@ body::after {
 
 @keyframes zoomIn {
 	from {
-		scale: 0.5;
+		transform: scale(0.5);
 	}
 	to {
-		scale: 1;
+		transform: scale(1);
 	}
 }
 
 @keyframes zoomOut {
 	from {
-		scale: 1;
+		transform: scale(1);
 	}
 	to {
-		scale: 0.5;
+		transform: scale(0.5);
 	}
 }
 
