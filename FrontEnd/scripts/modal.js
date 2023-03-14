@@ -1,40 +1,40 @@
-import { createGallery } from "./gallery.js";
-import { displayAlertBox } from "./admin.js";
+import { createGallery } from './gallery.js';
+import { displayAlertBox } from './admin.js';
 
-const focusElementSelector = "button, input, a, textarea";
+const focusElementSelector = 'button, input, a, textarea';
 let focusElements = [];
 let modalFocusElements = [];
 
 // Filtering focusable elements that are not in modal
 focusElements = Array.from(document.querySelectorAll(focusElementSelector));
-modalFocusElements = Array.from(document.querySelector("#edit-modal").querySelectorAll(focusElementSelector));
+modalFocusElements = Array.from(document.querySelector('#edit-modal').querySelectorAll(focusElementSelector));
 focusElements = focusElements.filter((element) => !modalFocusElements.includes(element));
 
 function openModal() {
 	// Show modal and change attributes for accessibility
-	const editModal = document.querySelector("#edit-modal");
-	editModal.style.display = "flex";
-	editModal.removeAttribute("aria-hidden");
-	editModal.setAttribute("aria-modal", true);
+	const editModal = document.querySelector('#edit-modal');
+	editModal.style.display = 'flex';
+	editModal.removeAttribute('aria-hidden');
+	editModal.setAttribute('aria-modal', true);
 
 	// Add events to close modal on button and outside modal wrapper
-	editModal.addEventListener("click", closeModal);
-	editModal.querySelectorAll(".close-modal").forEach((button) => button.addEventListener("click", closeModal));
-	editModal.querySelector(".modal-wrapper").addEventListener("click", stopPropagation);
+	editModal.addEventListener('click', closeModal);
+	editModal.querySelectorAll('.close-modal').forEach((button) => button.addEventListener('click', closeModal));
+	editModal.querySelector('.modal-wrapper').addEventListener('click', stopPropagation);
 
 	// Add events to change page
-	editModal.querySelector("#add-picture").addEventListener("click", openUploadModalPage);
-	editModal.querySelector(".previous-modal").addEventListener("click", closeUploadModalPage);
+	editModal.querySelector('#add-picture').addEventListener('click', openUploadModalPage);
+	editModal.querySelector('.previous-modal').addEventListener('click', closeUploadModalPage);
 
 	// Add event for picture preview
-	editModal.querySelector("#image").addEventListener("change", updatePicturePreview);
+	editModal.querySelector('#image').addEventListener('change', updatePicturePreview);
 
 	// Add event for form submit
-	editModal.querySelector("form").addEventListener("submit", uploadWork);
+	editModal.querySelector('form').addEventListener('submit', uploadWork);
 
 	// Disabling focusability on elements outside modal
 	for (let element of focusElements) {
-		element.setAttribute("tabindex", -1);
+		element.setAttribute('tabindex', -1);
 	}
 
 	// Add gallery
@@ -46,38 +46,38 @@ function openModal() {
 
 function closeModal() {
 	// Hide modal (with delay for animation) and change attributes for accessibility
-	const editModal = document.querySelector("#edit-modal");
+	const editModal = document.querySelector('#edit-modal');
 	window.setTimeout(() => (editModal.style.display = null), 300);
-	editModal.setAttribute("aria-hidden", true);
-	editModal.removeAttribute("aria-modal");
+	editModal.setAttribute('aria-hidden', true);
+	editModal.removeAttribute('aria-modal');
 
 	// Remove events to close modal
-	editModal.removeEventListener("click", closeModal);
-	editModal.querySelectorAll(".close-modal").forEach((button) => button.removeEventListener("click", closeModal));
-	editModal.querySelector(".modal-wrapper").removeEventListener("click", stopPropagation);
+	editModal.removeEventListener('click', closeModal);
+	editModal.querySelectorAll('.close-modal').forEach((button) => button.removeEventListener('click', closeModal));
+	editModal.querySelector('.modal-wrapper').removeEventListener('click', stopPropagation);
 
 	// Remove events to change page
-	editModal.querySelector("#add-picture").removeEventListener("click", openUploadModalPage);
-	editModal.querySelector(".previous-modal").removeEventListener("click", closeUploadModalPage);
+	editModal.querySelector('#add-picture').removeEventListener('click', openUploadModalPage);
+	editModal.querySelector('.previous-modal').removeEventListener('click', closeUploadModalPage);
 
 	// Remove event for picture preview
-	editModal.querySelector("#image").removeEventListener("change", updatePicturePreview);
+	editModal.querySelector('#image').removeEventListener('change', updatePicturePreview);
 
 	// Remove event for form submit
-	editModal.querySelector("form").removeEventListener("submit", uploadWork);
+	editModal.querySelector('form').removeEventListener('submit', uploadWork);
 
 	// Enabling focusability on elements outside modal
 	for (let element of focusElements) {
-		element.removeAttribute("tabindex");
+		element.removeAttribute('tabindex');
 	}
 
 	// Remove gallery
-	const gallery = editModal.querySelector(".edit-gallery");
-	gallery.innerHTML = "";
+	const gallery = editModal.querySelector('.edit-gallery');
+	gallery.innerHTML = '';
 
 	// Remove categories from form
-	const selectCategory = editModal.querySelector("#category");
-	selectCategory.innerHTML = "";
+	const selectCategory = editModal.querySelector('#category');
+	selectCategory.innerHTML = '';
 }
 
 // Function used to make sure click on modal wrapper wont close modal
@@ -87,35 +87,35 @@ function stopPropagation(event) {
 
 // Opening page for upload
 function openUploadModalPage() {
-	const galleryPage = document.querySelector("#gallery-modal-container");
-	const uploadPage = document.querySelector("#add-picture-modal-container");
+	const galleryPage = document.querySelector('#gallery-modal-container');
+	const uploadPage = document.querySelector('#add-picture-modal-container');
 
-	galleryPage.style.display = "none";
-	galleryPage.setAttribute("aria-hidden", true);
+	galleryPage.style.display = 'none';
+	galleryPage.setAttribute('aria-hidden', true);
 
-	uploadPage.style.display = "block";
-	uploadPage.removeAttribute("aria-hidden");
+	uploadPage.style.display = 'block';
+	uploadPage.removeAttribute('aria-hidden');
 }
 
 // Closing page for upload
 function closeUploadModalPage() {
-	const galleryPage = document.querySelector("#gallery-modal-container");
-	const uploadPage = document.querySelector("#add-picture-modal-container");
+	const galleryPage = document.querySelector('#gallery-modal-container');
+	const uploadPage = document.querySelector('#add-picture-modal-container');
 
 	galleryPage.style.display = null;
-	galleryPage.removeAttribute("aria-hidden");
+	galleryPage.removeAttribute('aria-hidden');
 
 	uploadPage.style.display = null;
-	uploadPage.setAttribute("aria-hidden", true);
+	uploadPage.setAttribute('aria-hidden', true);
 }
 
 // Add event to edit button for openning modal
-const editWorksButton = document.querySelector("#edit-works");
-editWorksButton.addEventListener("click", openModal);
+const editWorksButton = document.querySelector('#edit-works');
+editWorksButton.addEventListener('click', openModal);
 
 // Add event to escape key for closing modal
-window.addEventListener("keydown", (event) => {
-	if (event.key === "Escape" || event.key === "Esc") {
+window.addEventListener('keydown', (event) => {
+	if (event.key === 'Escape' || event.key === 'Esc') {
 		closeModal(event);
 	}
 });
@@ -124,33 +124,33 @@ window.addEventListener("keydown", (event) => {
 let works;
 fetchWorks();
 async function fetchWorks() {
-	const responseWorks = await fetch("http://localhost:5678/api/works");
+	const responseWorks = await fetch('http://localhost:5678/api/works');
 	works = await responseWorks.json();
 }
 
 // Function that creates gallery using an array of works
 function createEditGallery(works) {
-	const gallery = document.querySelector(".edit-gallery");
+	const gallery = document.querySelector('.edit-gallery');
 
 	for (let work of works) {
-		const figure = document.createElement("figure");
+		const figure = document.createElement('figure');
 		gallery.appendChild(figure);
 
-		const deleteButton = document.createElement("button");
-		deleteButton.addEventListener("click", () => {
+		const deleteButton = document.createElement('button');
+		deleteButton.addEventListener('click', () => {
 			deleteWork(work.id);
 		});
 
-		const trashIcon = document.createElement("i");
-		trashIcon.className = "fa-solid fa-trash-can";
+		const trashIcon = document.createElement('i');
+		trashIcon.className = 'fa-solid fa-trash-can';
 		deleteButton.appendChild(trashIcon);
 
-		const img = document.createElement("img");
+		const img = document.createElement('img');
 		img.src = work.imageUrl;
 		img.alt = work.title;
 
-		const figcaption = document.createElement("figcaption");
-		figcaption.innerText = "éditer";
+		const figcaption = document.createElement('figcaption');
+		figcaption.innerText = 'éditer';
 
 		figure.appendChild(deleteButton);
 		figure.appendChild(img);
@@ -160,15 +160,15 @@ function createEditGallery(works) {
 
 // Function to delete a project
 async function deleteWork(id) {
-	const token = localStorage.getItem("token");
+	const token = localStorage.getItem('token');
 
 	const response = await fetch(`http://localhost:5678/api/works/${id}`, {
-		method: "DELETE",
+		method: 'DELETE',
 		headers: { Authorization: `Bearer ${token}` },
 	});
 
-	document.querySelector(".edit-gallery").innerHTML = "";
-	document.querySelector(".gallery").innerHTML = "";
+	document.querySelector('.edit-gallery').innerHTML = '';
+	document.querySelector('.gallery').innerHTML = '';
 	fetchWorks().then(() => {
 		createEditGallery(works);
 		createGallery(works);
@@ -176,18 +176,18 @@ async function deleteWork(id) {
 }
 
 // Fetching all categories from API
-const responseCategories = await fetch("http://localhost:5678/api/categories");
+const responseCategories = await fetch('http://localhost:5678/api/categories');
 const categories = await responseCategories.json();
 
 // Adding categories options to upload form
 function createUploadCategories(categories) {
-	const selectCategory = document.querySelector("#category");
+	const selectCategory = document.querySelector('#category');
 
-	const emptyOption = document.createElement("option");
+	const emptyOption = document.createElement('option');
 	selectCategory.appendChild(emptyOption);
 
 	for (let category of categories) {
-		const option = document.createElement("option");
+		const option = document.createElement('option');
 		option.value = category.id;
 		option.innerText = category.name;
 
@@ -197,23 +197,23 @@ function createUploadCategories(categories) {
 
 // Adding preview for file upload
 function updatePicturePreview() {
-	const pictureInput = document.querySelector("#image");
-	const picturePreview = document.querySelector("#picture-preview");
+	const pictureInput = document.querySelector('#image');
+	const picturePreview = document.querySelector('#picture-preview');
 
-	picturePreview.innerHTML = "";
+	picturePreview.innerHTML = '';
 	picturePreview.style.opacity = 0;
 
 	if (pictureInput.files.length > 0) {
 		// Alert if file is not valid
 		if (!isValidFileType(pictureInput.files[0]) || pictureInput.files[0].size > 4194304) {
-			displayAlertBox("error", "Le fichier sélectionné n'est pas conforme", 3000);
+			displayAlertBox('error', "Le fichier sélectionné n'est pas conforme", 3000);
 			pictureInput.value = null;
 			return;
 		}
 
-		const preview = document.createElement("img");
+		const preview = document.createElement('img');
 		preview.src = window.URL.createObjectURL(pictureInput.files[0]);
-		preview.alt = "Image preview";
+		preview.alt = 'Image preview';
 
 		picturePreview.appendChild(preview);
 		picturePreview.style.opacity = 1;
@@ -222,7 +222,7 @@ function updatePicturePreview() {
 
 // Checking size and type of file
 function isValidFileType(file) {
-	const validFileTypes = ["image/jpeg", "image/png"];
+	const validFileTypes = ['image/jpeg', 'image/png'];
 
 	for (let type of validFileTypes) {
 		if (file.type === type) {
@@ -237,11 +237,11 @@ function isValidFileType(file) {
 async function uploadWork(event) {
 	event.preventDefault();
 
-	const token = localStorage.getItem("token");
+	const token = localStorage.getItem('token');
 	const workData = new FormData(event.target);
 
-	const responseUpload = await fetch("http://localhost:5678/api/works", {
-		method: "POST",
+	const responseUpload = await fetch('http://localhost:5678/api/works', {
+		method: 'POST',
 		headers: { Authorization: `Bearer ${token}` },
 		body: workData,
 	});
@@ -257,11 +257,11 @@ async function uploadWork(event) {
 		closeModal();
 
 		// Refresh gallery
-		document.querySelector(".gallery").innerHTML = "";
+		document.querySelector('.gallery').innerHTML = '';
 		fetchWorks().then(() => {
 			createGallery(works);
 		});
 	} else {
-		displayAlertBox("error", `Échec de la mise en ligne\nErreur ${responseUpload.status} : ${responseUpload.statusText}`, 3000);
+		displayAlertBox('error', `Échec de la mise en ligne\nErreur ${responseUpload.status} : ${responseUpload.statusText}`, 3000);
 	}
 }
