@@ -125,7 +125,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-	content: "";
+	content: '';
 	content: none;
 }
 
@@ -142,7 +142,7 @@ html {
 body {
 	min-height: 100vh;
 	position: relative;
-	font-family: "Work Sans";
+	font-family: 'Work Sans';
 	font-size: 14px;
 	background-color: #fffef8;
 }
@@ -169,20 +169,20 @@ section {
 h1 {
 	display: flex;
 	flex-direction: column;
-	font-family: "Syne";
+	font-family: 'Syne';
 	font-size: 22px;
 	font-weight: 800;
 	color: #b1663c;
 }
 
 h1 > span {
-	font-family: "Work Sans";
+	font-family: 'Work Sans';
 	font-size: 10px;
 	letter-spacing: 0.1em;
 }
 
 h2 {
-	font-family: "Syne";
+	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
 	color: #1d6154;
@@ -197,7 +197,7 @@ button:hover {
 	opacity: 0.8;
 }
 
-input[type="submit"]:hover {
+input[type='submit']:hover {
 	opacity: 0.8;
 }
 
@@ -213,6 +213,10 @@ nav li {
 }
 
 li:hover {
+	color: #b1663c;
+}
+
+nav a:hover {
 	color: #b1663c;
 }
 
@@ -269,7 +273,7 @@ nav img {
 	height: 40px;
 	font-size: 1.2em;
 	font-weight: 700;
-	font-family: "Syne";
+	font-family: 'Syne';
 	color: #1d6154;
 	background-color: #fffef8;
 	border: 1px solid #1d6154;
@@ -332,8 +336,8 @@ nav img {
 	resize: none;
 }
 
-input[type="submit"] {
-	font-family: "Syne";
+input[type='submit'] {
+	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
 	background-color: #1d6154;
@@ -408,7 +412,7 @@ input[type="submit"] {
 	background: 0;
 	border: 1px solid white;
 	border-radius: 3px;
-	font-family: "Syne";
+	font-family: 'Syne';
 	color: white;
 	font-size: 1.1em;
 	position: absolute;
@@ -431,7 +435,7 @@ footer nav ul {
 }
 
 body::after {
-	content: "";
+	content: '';
 	display: block;
 	height: 70px;
 }
@@ -460,7 +464,7 @@ body::after {
 	height: 40px;
 	font-size: 1.2em;
 	font-weight: 500;
-	font-family: "Work Sans";
+	font-family: 'Work Sans';
 	color: black;
 	background-color: white;
 	border-radius: 60px;
@@ -520,11 +524,11 @@ body::after {
 	animation: zoomIn 0.3s both;
 }
 
-.modal[aria-hidden="true"] {
+.modal[aria-hidden='true'] {
 	animation-name: fadeOut;
 }
 
-.modal[aria-hidden="true"] .modal-wrapper {
+.modal[aria-hidden='true'] .modal-wrapper {
 	animation-name: zoomOut;
 }
 
@@ -644,7 +648,7 @@ body::after {
 	height: 40px;
 	font-size: 1.2em;
 	font-weight: 700;
-	font-family: "Syne";
+	font-family: 'Syne';
 	color: white;
 	background-color: #1d6154;
 	border: 0;
@@ -656,7 +660,7 @@ body::after {
 
 .modal a {
 	display: block;
-	font-family: "Syne";
+	font-family: 'Syne';
 	color: #d65353;
 }
 
@@ -684,7 +688,7 @@ body::after {
 }
 
 /* Hiding file input to customize label, still focusable with keyboard */
-#add-picture-container input[type="file"] {
+#add-picture-container input[type='file'] {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -715,17 +719,17 @@ body::after {
 	font-weight: 500;
 }
 
-#add-picture-modal-container input[type="text"],
+#add-picture-modal-container input[type='text'],
 #add-picture-modal-container select {
 	width: 100%;
 	height: 40px;
 	box-sizing: border-box;
-	font-family: "Work Sans";
+	font-family: 'Work Sans';
 	border: 0;
 	box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
-#add-picture-modal-container input[type="text"] {
+#add-picture-modal-container input[type='text'] {
 	padding: 10px;
 }
 
@@ -740,7 +744,7 @@ body::after {
 	margin: 70px 0 50px 0;
 }
 
-#add-picture-modal-container input[type="submit"] {
+#add-picture-modal-container input[type='submit'] {
 	border: 0;
 	height: 35px;
 	margin: 0;

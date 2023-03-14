@@ -12,7 +12,7 @@ if (window.sessionStorage.getItem('token')) {
 
 	// Change login to logout
 	loginLink.href = 'index.html';
-	loginLink.innerHTML = '<li>logout</li>';
+	loginLink.innerText = 'logout';
 
 	// Logout removes token from session storage
 	loginLink.addEventListener('click', () => {
