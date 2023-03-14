@@ -55,8 +55,10 @@ function alertBox(type, message) {
 	box.appendChild(text);
 
 	const closeButton = document.createElement('button');
-	closeButton.innerText = 'X';
 	closeButton.addEventListener('click', () => box.parentNode.removeChild(box));
+	const closeIcon = document.createElement('i');
+	closeIcon.className = 'fa-solid fa-xmark';
+	closeButton.appendChild(closeIcon);
 	box.appendChild(closeButton);
 
 	return box;
