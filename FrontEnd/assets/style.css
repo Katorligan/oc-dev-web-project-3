@@ -467,6 +467,7 @@ body::after {
 	font-family: 'Work Sans';
 	color: black;
 	background-color: white;
+	border: 0;
 	border-radius: 60px;
 	padding: 0 25px;
 	cursor: pointer;

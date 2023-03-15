@@ -26,6 +26,9 @@ function openModal() {
 	editModal.querySelector('#add-picture').addEventListener('click', openUploadModalPage);
 	editModal.querySelector('.previous-modal').addEventListener('click', closeUploadModalPage);
 
+	// Add event to delete gallery
+	editModal.querySelector('#delete-gallery').addEventListener('click', deleteAll);
+
 	// Add event for picture preview
 	editModal.querySelector('#image').addEventListener('change', updatePicturePreview);
 
@@ -64,6 +67,9 @@ function closeModal() {
 	// Remove events to change page
 	editModal.querySelector('#add-picture').removeEventListener('click', openUploadModalPage);
 	editModal.querySelector('.previous-modal').removeEventListener('click', closeUploadModalPage);
+
+	// Remove event to delete gallery
+	editModal.querySelector('#delete-gallery').removeEventListener('click', deleteAll);
 
 	// Remove event for picture preview
 	editModal.querySelector('#image').removeEventListener('change', updatePicturePreview);
@@ -178,6 +184,27 @@ async function deleteWork(id) {
 		method: 'DELETE',
 		headers: { Authorization: `Bearer ${token}` },
 	});
+
+	document.querySelector('.edit-gallery').innerHTML = '';
+	document.querySelector('.gallery').innerHTML = '';
+	fetchWorks().then(() => {
+		createEditGallery(works);
+		createGallery(works);
+	});
+}
+
+// Function to delete all projects
+async function deleteAll(event) {
+	event.preventDefault();
+
+	const token = sessionStorage.getItem('token');
+
+	for (let work of works) {
+		const response = await fetch(`http://localhost:5678/api/works/${work.id}`, {
+			method: 'DELETE',
+			headers: { Authorization: `Bearer ${token}` },
+		});
+	}
 
 	document.querySelector('.edit-gallery').innerHTML = '';
 	document.querySelector('.gallery').innerHTML = '';
